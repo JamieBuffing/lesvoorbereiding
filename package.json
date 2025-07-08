@@ -1,0 +1,30 @@
+{
+  "name": "lesvoorbereiding",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/JamieBuffing/lesvoorbereiding#readme",
+  "bugs": {
+    "url": "https://github.com/JamieBuffing/lesvoorbereiding/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamieBuffing/lesvoorbereiding.git"
+  },
+  "license": "ISC",
+  "author": "Jamie Buffing",
+  "type": "node",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.1.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongodb": "^6.17.0",
+    "multer": "^2.0.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "build": "babel src -d dist"
+  }
+}

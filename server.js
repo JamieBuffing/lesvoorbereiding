@@ -15,3 +15,6 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res) {   // Als er niks is ingevuld of gewoon de home url. Toon dan index.ejs
     res.render('pages/index');
 });
+
+module.exports = app;
+module.exports.handler = serverless(app);

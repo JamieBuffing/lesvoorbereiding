@@ -24,9 +24,5 @@
     "mongodb": "^6.17.0",
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "build": "babel src -d dist"
   }
 }

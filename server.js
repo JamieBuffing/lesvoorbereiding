@@ -9,6 +9,7 @@ const session = require("express-session");
 const { maxHeaderSize } = require('http');
 const multer = require('multer');
 const path = require('path');
+const serverless = require('serverless-http');
 
 app.set('view engine', 'ejs');
 

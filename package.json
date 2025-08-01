@@ -1,0 +1,24 @@
+{
+  "name": "lesvoorbereiding-1",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/JamieBuffing/lesvoorbereiding#readme",
+  "bugs": {
+    "url": "https://github.com/JamieBuffing/lesvoorbereiding/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamieBuffing/lesvoorbereiding.git"
+  },
+  "license": "ISC",
+  "author": "Jamie Buffing",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@vercel/blob": "^1.1.1",
+    "formidable": "^3.5.4"
+  }
+}

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/", "destination": "/public/index.html" },
-    { "source": "/upload", "destination": "/public/upload.html" },
-    { "source": "/api/upload", "destination": "/api/upload.js" }
+  "routes": [
+    { "src": "/api/upload", "methods": ["POST"], "dest": "/api/upload.js" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/index.html", "permanent": true },
+    { "source": "/upload", "destination": "/upload.html", "permanent": true }
   ]
 }

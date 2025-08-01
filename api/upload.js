@@ -1,33 +1,53 @@
-import { put } from '@vercel/blob';
+import { Blob } from '@vercel/blob';
 import formidable from 'formidable';
-import fs from 'fs';
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false, // formidable doet zelf de parsing
+  },
 };
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Alleen POST toegestaan' });
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
-  const form = formidable({ multiples: false });
+  const form = new formidable.IncomingForm();
+
   form.parse(req, async (err, fields, files) => {
-    if (err) return res.status(500).json({ error: 'Parse error' });
+    if (err) {
+      res.status(500).json({ error: 'Error parsing form' });
+      return;
+    }
+
+    if (!files.file) {
+      res.status(400).json({ error: 'No file uploaded' });
+      return;
+    }
 
     const file = files.file;
-    if (!file) return res.status(400).json({ error: 'Geen bestand gevonden' });
 
     try {
-      const stream = fs.createReadStream(file.filepath);
-      const { url } = await put(file.originalFilename, stream, {
-        access: 'public'
+      // Blob container & token via env variables instellen
+      const blob = new Blob({
+        account: process.env.VERCEL_BLOB_ACCOUNT,
+        container: process.env.VERCEL_BLOB_CONTAINER,
+        token: process.env.VERCEL_BLOB_TOKEN,
       });
-      res.status(200).json({ url });
-    } catch (e) {
-      res.status(500).json({ error: 'Upload mislukt', details: e.message });
+
+      // Upload het bestand
+      const uploadResponse = await blob.uploadFile({
+        name: file.originalFilename,
+        stream: file.filepath ? fs.createReadStream(file.filepath) : null,
+        size: file.size,
+        type: file.mimetype,
+      });
+
+      res.status(200).json({ url: uploadResponse.url });
+    } catch (uploadError) {
+      console.error(uploadError);
+      res.status(500).json({ error: 'Upload failed' });
     }
   });
 }

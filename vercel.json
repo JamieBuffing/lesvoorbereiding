@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/api/upload", "methods": ["POST"], "dest": "/api/upload.js" }
-  ],
   "redirects": [
     { "source": "/", "destination": "/index.html", "permanent": true },
     { "source": "/upload", "destination": "/upload.html", "permanent": true }
